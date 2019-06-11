@@ -26,25 +26,32 @@ package tool;
  *  设置游戏难度          setGameLevel(int gameLevel)
  *
  */
+@SuppressWarnings("ALL")
 public class GameParamaters {
     private static final GameParamaters GAME_PROPERTIES = new GameParamaters();
 
-    public static final int BLOCK_WIDTH = 32;
-    public static final int BLOCK_HEIGHT = 32;
+    private static final int BLOCK_WIDTH = 32;
+    private static final int BLOCK_HEIGHT = 32;
 
-    public static final int MENU_BAR_HEIGHT = 20;
-    public static final int STATUS_BAR_HEIGHT = 60;
+    private static final int MENU_BAR_HEIGHT = 20;
+    private static final int STATUS_BAR_HEIGHT = 60;
 
-    private int frameWidth; // 界面宽度(实际是由砖块数组的宽度决定, 且所有控件宽度一致)
-    private int frameHeight;// 界面高度
+    /** 界面宽度(实际是由砖块数组的宽度决定, 且所有控件宽度一致) */
+    private int frameWidth;
+    /** 界面高度 */
+    private int frameHeight;
 
-    private int gameLevel;  // 游戏难度; 1-3 分别代表简单,中等和困难
-    private int mineRow;    // 砖块数组的行
-    private int mineCloumn; // 砖块数组的列
-    private int mineNumber; // 砖块数组中雷的个数
+    /** 游戏难度; 1-3 分别代表简单,中等和困难 */
+    private int gameLevel;
+    /** 砖块数组的行 */
+    private int mineRow;
+    /** 砖块数组的列 */
+    private int mineCloumn;
+    /** 砖块数组中雷的个数 */
+    private int mineNumber;
 
     private GameParamaters() {
-        gameLevel = 3;
+        gameLevel = 1;
         setParamaters();
     }
 
@@ -93,7 +100,9 @@ public class GameParamaters {
         setFrameSizeParamaters();
     }
 
-    // 设置界面大小相关的参数
+    /**
+     * 设置界面大小相关的参数
+     */
     private void setFrameSizeParamaters() {
         setAllWidth();
         setFrameHeight();
@@ -145,5 +154,21 @@ public class GameParamaters {
 
     public int getBlockY() {
         return MENU_BAR_HEIGHT + STATUS_BAR_HEIGHT;
+    }
+
+    public int getBlockWidth() {
+        return BLOCK_WIDTH;
+    }
+
+    public int getBlockHeight() {
+        return BLOCK_HEIGHT;
+    }
+
+    public int getMenuBarHeight() {
+        return MENU_BAR_HEIGHT;
+    }
+
+    public int getStatusBarHeight() {
+        return STATUS_BAR_HEIGHT;
     }
 }

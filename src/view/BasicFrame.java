@@ -23,20 +23,23 @@ public class BasicFrame extends JFrame {
     private void initFrame() {
         setTitle("MinerSweeper");
         // 注意： JFrame大小并不是实际的可见大小，应在基础的Panel中使用setPreferredSize()
-        //setSize(myGameParamaters.getFrameWidth(), myGameParamaters.getFrameHeight());
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        setContentPane(basicPanel);     // 设置内容面板
+        // 设置内容面板
+        setContentPane(basicPanel);
         pack();
-        setLocationRelativeTo(null);    // 设置窗口居中
+        // 设置窗口居中
+        setLocationRelativeTo(null);
     }
 
     public MinePanel getMinePanel() {
         return minePanel;
     }
 
-    // 基础面板
+    /**
+     * 内部类： 基础面板
+     */
     private class BasicPanel extends JPanel {
         private BasicPanel() {
             // 开启双缓存
@@ -44,13 +47,18 @@ public class BasicFrame extends JFrame {
             initBasicPanel();
         }
 
+        /**
+         * 初始化基础面板
+         */
         private void initBasicPanel() {
             setLayout(null);
             setPreferredSize(new Dimension(myGameParamaters.getFrameWidth(), myGameParamaters.getFrameHeight()));
             initMinePanel();
         }
 
-        /* 初始化雷区面板 */
+        /**
+         * 初始化雷区面板
+         */
         private void initMinePanel() {
             minePanel = new MinePanel();
             add(minePanel);

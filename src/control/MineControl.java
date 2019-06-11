@@ -15,6 +15,9 @@ import java.awt.event.MouseEvent;
 
 public class MineControl {
     private static int DELAY = 5;
+    private static int LEFT_RIGHT_MOUSE_EVENT = 1;
+    private static int LEFT_MOUSE_EVENT = 2;
+    private static int RIGHT_MOUSE_EVENT = 3;
 
     private GameParamaters myGameParamaters;
 
@@ -25,48 +28,66 @@ public class MineControl {
         myGameParamaters = GameParamaters.getGameProperties();
 
         minePanel = basicFrame.getMinePanel();
-        minePanel.addMouseListener(new mineMouseListener());
+        minePanel.addMouseListener(new MineMouseListener());
         mineBlockData = new MineBlockData();
 
-        new Thread(() -> {
-           runThread();
-        }).start();
+        new Thread(this::runThread).start();
     }
 
     private void runThread() {
         clickEvent(0, -1, -1);
     }
 
+    private void pause(int t) {
+        try {
+            Thread.sleep(t);
+        }
+        catch (InterruptedException e) {
+            System.out.println("Error sleeping");
+        }
+    }
+
     private void clickEvent(int clickStatus, int x, int y) {
         // 左右键同时点击
-        if (clickStatus == 1) {
+        if (clickStatus == LEFT_RIGHT_MOUSE_EVENT) {
         // 左键单击
-        } else if (clickStatus == 2) {
+        } else if (clickStatus == LEFT_MOUSE_EVENT) {
             mineBlockData.setOpened(x, y);
         // 右键单击
-        } else if (clickStatus == 3) {
+        } else if (clickStatus == RIGHT_MOUSE_EVENT) {
             mineBlockData.setHasFlag(x, y);
         }
+        pause(DELAY);
         minePanel.render(mineBlockData);
     }
 
-    private class mineMouseListener extends MouseAdapter {
+    private class MineMouseListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent event) {
             Point position = event.getPoint();
 
-            int x = position.y / myGameParamaters.BLOCK_HEIGHT;
-            int y = position.x / myGameParamaters.BLOCK_WIDTH;
+            int x = position.y / myGameParamaters.getBlockHeight();
+            int y = position.x / myGameParamaters.getBlockWidth();
 
-            // 双击:事件1
-            if (event.getButton() == MouseEvent.BUTTON1 && event.getButton() == MouseEvent.BUTTON3) {
-
-            // 左键单击:事件2
-            } else if (event.getButton() == MouseEvent.BUTTON1) {
-                clickEvent(2, x, y);
-            // 右键单击:事件3
+            // 左键单击
+            if (event.getButton() == MouseEvent.BUTTON1) {
+                clickEvent(LEFT_MOUSE_EVENT, x, y);
+            // 右键单击
             } else if (event.getButton() == MouseEvent.BUTTON3) {
-                clickEvent(3, x, y);
+                clickEvent(RIGHT_MOUSE_EVENT, x, y);
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent event) {
+            Point position = event.getPoint();
+
+            int x = position.y / myGameParamaters.getBlockHeight();
+            int y = position.x / myGameParamaters.getBlockWidth();
+
+            // 左右键长按
+            if (event.getButton() == MouseEvent.BUTTON1 && event.getButton() == MouseEvent.BUTTON3) {
+                clickEvent(LEFT_RIGHT_MOUSE_EVENT, x, y);
             }
         }
     }

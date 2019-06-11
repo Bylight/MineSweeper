@@ -15,7 +15,7 @@ public class MineBlockData {
         initMineBlockData();
     }
 
-    public boolean isInBlockArea(int x, int y) {
+    private boolean isInBlockArea(int x, int y) {
         return (x >= 0 && x < myGameParamaters.getMineRow()) && (y >= 0 && y < myGameParamaters.getMineCloumn());
     }
 
@@ -30,47 +30,65 @@ public class MineBlockData {
      * @return  当前砖块是否含雷(true/false)
      */
     public boolean getBlockIsMine(int x, int y) {
-        if (!isInBlockArea(x, y))
+        if (!isInBlockArea(x, y)) {
             throw new IllegalArgumentException("wrong array position! It is (" + x + ", " + y + ") now!");
+        }
         return mineBlocks[x][y].isMine;
     }
 
     public boolean getHasBeeOpened(int x, int y) {
-        if (!isInBlockArea(x, y))
+        if (!isInBlockArea(x, y)) {
             throw new IllegalArgumentException("wrong array position! It is (" + x + ", " + y + ") now!");
+        }
         return mineBlocks[x][y].hasBeenOpened;
     }
 
     public int getMineAroundNumber(int x, int y) {
-        if (!isInBlockArea(x, y))
+        if (!isInBlockArea(x, y)) {
             throw new IllegalArgumentException("wrong array position! It is (" + x + ", " + y + ") now!");
+        }
         return mineBlocks[x][y].mineAroundNumber;
     }
 
     public boolean getHasFlag(int x, int y) {
-        if (!isInBlockArea(x, y))
+        if (!isInBlockArea(x, y)) {
             throw new IllegalArgumentException("wrong array position! It is (" + x + ", " + y + ") now!");
+        }
         return mineBlocks[x][y].hasFlag;
     }
 
     /**
      * 将特定砖块打开
-     * @param x
-     * @param y
+     * @param x 砖块横坐标
+     * @param y 砖块纵坐标
      */
     public void setOpened(int x, int y) {
-        if (!mineBlocks[x][y].hasFlag)
+        if (!mineBlocks[x][y].hasFlag) {
             mineBlocks[x][y].hasBeenOpened = true;
+        }
+
+        System.out.println("空格被点击了" + x + ", " + y + "MineNumber = " + mineBlocks[x][y].mineAroundNumber);
+
+        if (mineBlocks[x][y].mineAroundNumber == 0) {
+            for (int i = x - 1; i <= x + 1; ++i) {
+                for (int j = y - 1; j <= j + 1; ++j) {
+                    if (isInBlockArea(i, j) && !mineBlocks[i][j].hasBeenOpened && !mineBlocks[i][j].hasFlag && !mineBlocks[i][j].isMine) {
+                        setOpened(i, j);
+                    }
+                }
+            }
+        }
     }
 
     /**
      * 若特定砖块未打开，则改变它的插旗状态
-     * @param x
-     * @param y
+     * @param x 砖块横坐标
+     * @param y 砖块纵坐标
      */
     public void setHasFlag(int x, int y) {
-        if (!mineBlocks[x][y].hasBeenOpened)
+        if (!mineBlocks[x][y].hasBeenOpened) {
             mineBlocks[x][y].hasFlag = !mineBlocks[x][y].hasFlag;
+        }
     }
 
     /**
@@ -165,7 +183,9 @@ public class MineBlockData {
         }
     }
 
-    // 雷区砖块模型
+    /**
+     * 单个砖块
+     */
     private class MineBlock {
         private int mineAroundNumber;
         private boolean hasFlag;

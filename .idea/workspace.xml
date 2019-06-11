@@ -4,21 +4,8 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63e99c06-5759-4910-a07a-5af51bf1ab78" name="Default Changelist" comment="根据阿里巴巴编码规范修改了代码格式">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="63e99c06-5759-4910-a07a-5af51bf1ab78" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MineSweeper/control/MineControl$mineMouseListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MineSweeper/control/MineControl$mineMouseListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MineSweeper/control/MineControl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MineSweeper/control/MineControl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MineSweeper/model/MineBlockData$MineBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MineSweeper/model/MineBlockData$MineBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MineSweeper/model/MineBlockData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MineSweeper/model/MineBlockData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MineSweeper/tool/GameParamaters.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MineSweeper/tool/GameParamaters.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MineSweeper/view/MinePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MineSweeper/view/MinePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/control/MineControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/control/MineControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/MineBlockData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/MineBlockData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tool/GameParamaters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tool/GameParamaters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tool/GameResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tool/GameResources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BasicFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BasicFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MinePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MinePanel.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,7 +34,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tool/GameResources.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
+            <state relative-caret-position="373">
               <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
             </state>
           </provider>
@@ -65,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/MinePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+            <state relative-caret-position="799">
+              <caret line="72" column="16" selection-start-line="72" selection-start-column="16" selection-end-line="72" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -87,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/control/MineControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+            <state relative-caret-position="442">
+              <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -99,8 +86,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/MineBlockData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="84" column="5" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
+            <state relative-caret-position="527">
+              <caret line="31" column="48" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
               <folding>
                 <element signature="e#4601#4602#0" expanded="true" />
                 <element signature="e#4638#4639#0" expanded="true" />
@@ -120,9 +107,9 @@
         <option value="$PROJECT_DIR$/src/tool/GameParamaters.java" />
         <option value="$PROJECT_DIR$/src/view/BasicFrame.java" />
         <option value="$PROJECT_DIR$/src/tool/GameResources.java" />
-        <option value="$PROJECT_DIR$/src/model/MineBlockData.java" />
         <option value="$PROJECT_DIR$/src/view/MinePanel.java" />
         <option value="$PROJECT_DIR$/src/control/MineControl.java" />
+        <option value="$PROJECT_DIR$/src/model/MineBlockData.java" />
       </list>
     </option>
   </component>
@@ -231,7 +218,7 @@
       <workItem from="1560228404856" duration="5710000" />
       <workItem from="1560242156710" duration="771000" />
       <workItem from="1560242968973" duration="4254000" />
-      <workItem from="1560254063790" duration="266000" />
+      <workItem from="1560254063790" duration="852000" />
     </task>
     <task id="LOCAL-00001" summary="创建本地仓库">
       <created>1560228755178</created>
@@ -247,11 +234,18 @@
       <option name="project" value="LOCAL" />
       <updated>1560229030306</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="根据阿里巴巴编码规范修改了代码格式">
+      <created>1560254536257</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1560254536257</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11011000" />
+    <option name="totallyTimeSpent" value="11597000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -264,8 +258,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12739871" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12739871" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -274,7 +269,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.20607375" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20607375" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -284,7 +279,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.329718" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.2407809" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -378,24 +373,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="根据阿里巴巴编码规范修改了代码格式" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/tool/GameResources.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/MineBlockData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="84" column="5" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
-          <folding>
-            <element signature="e#4601#4602#0" expanded="true" />
-            <element signature="e#4638#4639#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tool/GameParamaters.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -427,17 +404,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/MinePanel.java">
+    <entry file="file://$PROJECT_DIR$/src/model/MineBlockData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+        <state relative-caret-position="527">
+          <caret line="31" column="48" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
+          <folding>
+            <element signature="e#4601#4602#0" expanded="true" />
+            <element signature="e#4638#4639#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/control/MineControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+        <state relative-caret-position="442">
+          <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tool/GameResources.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/MinePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="72" column="16" selection-start-line="72" selection-start-column="16" selection-end-line="72" selection-end-column="16" />
         </state>
       </provider>
     </entry>

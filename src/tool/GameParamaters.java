@@ -36,6 +36,9 @@ public class GameParamaters {
     private static final int MENU_BAR_HEIGHT = 20;
     private static final int STATUS_BAR_HEIGHT = 60;
 
+    private boolean loseGame;
+    private boolean winGame;
+
     /** 界面宽度(实际是由砖块数组的宽度决定, 且所有控件宽度一致) */
     private int frameWidth;
     /** 界面高度 */
@@ -51,6 +54,8 @@ public class GameParamaters {
     private int mineNumber;
 
     private GameParamaters() {
+        loseGame = false;
+        winGame = false;
         gameLevel = 1;
         setParamaters();
     }
@@ -148,11 +153,11 @@ public class GameParamaters {
         setParamaters();
     }
 
-    public int getStatusBarY() {
+    public int getstatusbary() {
         return MENU_BAR_HEIGHT;
     }
 
-    public int getBlockY() {
+    public int getblocky() {
         return MENU_BAR_HEIGHT + STATUS_BAR_HEIGHT;
     }
 
@@ -170,5 +175,21 @@ public class GameParamaters {
 
     public int getStatusBarHeight() {
         return STATUS_BAR_HEIGHT;
+    }
+
+    public boolean getLoseGame() {
+        return loseGame;
+    }
+
+    public void setLoseGame(boolean loseGame) {
+        this.loseGame = loseGame;
+    }
+
+    public boolean getWinGame() {
+        return winGame;
+    }
+
+    public void setWinGame(boolean winGame) {
+        this.winGame = winGame;
     }
 }

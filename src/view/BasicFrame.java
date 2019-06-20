@@ -62,7 +62,7 @@ public class BasicFrame extends JFrame {
         private void initMinePanel() {
             minePanel = new MinePanel();
             add(minePanel);
-            minePanel.setBounds(0, myGameParamaters.getBlockY(), myGameParamaters.getFrameWidth(), myGameParamaters.getMineHeight());
+            minePanel.setBounds(0, myGameParamaters.getblocky(), myGameParamaters.getFrameWidth(), myGameParamaters.getMineHeight());
         }
     }
 }

@@ -9,7 +9,7 @@ import java.awt.*;
 /**
  * 游戏资源路径(图片大小32*32)
  */
-public class GameResources {
+public class GameTool {
     private static final int MIN_MINE_NUMBER = 0;
     private static final int MAX_MINE_NUMBER = 8;
 
@@ -17,7 +17,9 @@ public class GameResources {
     public static final String FLAG_IMAGE_URL = "resources/flag.png";
     public static final String MINE_IMAGE_URL = "resources/mine.png";
 
-    private GameResources() {}
+    private static MineControl mineControl;
+
+    private GameTool() {}
 
     /**
      * 返回对应数字(0-8)的图片
@@ -46,8 +48,41 @@ public class GameResources {
         // 初始化总面板
         EventQueue.invokeLater(() -> {
             BasicFrame basicFrame = new BasicFrame();
-            MineControl mineControl = new MineControl(basicFrame);
-});
+            mineControl = new MineControl(basicFrame);
+        });
+    }
+
+    /**
+     * 打开砖块但砖块中有雷(输游戏)
+     */
+    public static void loseGame() {
+        mineControl.showAllMine();
+
+        int res = JOptionPane.showConfirmDialog(null, "重新开始?", "你输了！！！", JOptionPane.YES_NO_OPTION);
+
+        if (res == JOptionPane.YES_OPTION) {
+            GameParamaters.getGameProperties().setLoseGame(false);
+            GameParamaters.getGameProperties().setWinGame(false);
+            startGame();
+        } else if (res == JOptionPane.NO_OPTION) {
+            System.exit(0);
+        }
+    }
+
+    /**
+     * 打开所有砖块,找出所有雷(赢游戏)
+     */
+    public static void winGame() {
+
+        int res = JOptionPane.showConfirmDialog(null, "再玩一次?", "你赢了！！！", JOptionPane.YES_NO_OPTION);
+
+        if (res == JOptionPane.YES_OPTION) {
+            GameParamaters.getGameProperties().setLoseGame(false);
+            GameParamaters.getGameProperties().setWinGame(false);
+            startGame();
+        } else if (res == JOptionPane.NO_OPTION) {
+            System.exit(0);
+        }
     }
 }
 

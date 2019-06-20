@@ -1,6 +1,7 @@
 package model;
 
 import tool.GameParamaters;
+import tool.GameTool;
 
 /**
  * 雷区数据
@@ -10,19 +11,50 @@ public class MineBlockData {
     private GameParamaters myGameParamaters;
     private MineBlock[][] mineBlocks;
 
+    /**被旗子标记的雷的数目*/
+    private int mineWithFlag;
+    /**当前已标记的旗子总数*/
+    private int flagNumbers;
+    /**未被打开或未被旗子标记的砖块数目*/
+    private int needOpenOrFlag;
+
     public MineBlockData() {
         myGameParamaters = GameParamaters.getGameProperties();
         initMineBlockData();
     }
 
+    /**
+     * 判断是否已经赢得游戏(找出所有的雷且打开所有砖块)
+     */
+    public void hasWin() {
+        myGameParamaters.setWinGame((mineWithFlag == flagNumbers)
+                && (mineWithFlag == myGameParamaters.getMineNumber()) && (needOpenOrFlag == 0));
+    }
+
+    /**
+     * 判断给定坐标合法性
+     * @param x 砖块横坐标
+     * @param y 砖块纵坐标
+     * @return 当前坐标是否合法(true/false)
+     */
     private boolean isInBlockArea(int x, int y) {
         return isRowLeaglegal(x) && isCloumnLegal(y);
     }
 
+    /**
+     * 判断给定横坐标合法性
+     * @param x 砖块横坐标
+     * @return 当前横坐标是否合法(true/false)
+     */
     private boolean isRowLeaglegal(int x) {
         return x >= 0 && x < myGameParamaters.getMineRow();
     }
 
+    /**
+     * 判断给定纵坐标合法性
+     * @param y 砖块纵坐标
+     * @return 当前纵坐标是否合法(true/false)
+     */
     private boolean isCloumnLegal(int y) {
         return y >= 0 && y < myGameParamaters.getMineCloumn();
     }
@@ -83,6 +115,24 @@ public class MineBlockData {
         return mineBlocks[x][y].hasFlag;
     }
 
+    /**
+     * 打开指定砖块
+     * @param x 砖块横坐标
+     * @param y 砖块纵坐标
+     */
+    private void openBlock(int x, int y) {
+        if (!mineBlocks[x][y].hasBeenOpened && !mineBlocks[x][y].hasFlag) {
+            mineBlocks[x][y].hasBeenOpened = true;
+            --needOpenOrFlag;
+        }
+    }
+
+
+    /**
+     * 双击已展开方块时，在用旗子标明附近雷数时自动展开周围8个非雷格子
+     * @param x 砖块横坐标
+     * @param y 砖块纵坐标
+     */
     public void previewBlockAround(int x, int y) {
         if (!isInBlockArea(x, y)) {
             throw new IllegalArgumentException("wrong array position! It is (" + x + ", " + y + ") now!");
@@ -105,12 +155,12 @@ public class MineBlockData {
             }
         }
 
-        // 插旗正确(插旗数等于雷数且正好插在雷上)则展开
+        // 插旗正确(周围插旗数等于雷数且正好插在雷上)则展开
         if (rightNumber == mineBlocks[x][y].mineAroundNumber && rightNumber == previewNumber) {
             for (int i = x - 1; i <= x + 1; ++i) {
                 for (int j = y - 1; j <= y + 1; ++j) {
-                    if (isInBlockArea(i, j) && !mineBlocks[i][j].hasBeenOpened && !mineBlocks[i][j].hasFlag) {
-                        mineBlocks[i][j].hasBeenOpened = true;
+                    if (isInBlockArea(i, j)) {
+                        openBlock(i, j);
                     }
                 }
             }
@@ -123,12 +173,15 @@ public class MineBlockData {
      * @param y 砖块纵坐标
      */
     public void setOpened(int x, int y) {
-        if (mineBlocks[x][y].hasFlag) {
+        // 如果点击到雷
+        if (mineBlocks[x][y].isMine) {
+            myGameParamaters.setLoseGame(true);
             return;
         }
 
-        mineBlocks[x][y].hasBeenOpened = true;
+        openBlock(x, y);
 
+        // 单击空白砖块
         if (mineBlocks[x][y].mineAroundNumber == 0) {
             // 上
             if (isInBlockArea(x - 1, y) && !mineBlocks[x - 1][y].hasBeenOpened && !mineBlocks[x - 1][y].isMine) {
@@ -163,6 +216,20 @@ public class MineBlockData {
                 setOpened(x + 1, y + 1);
             }
         }
+
+    }
+
+    /**
+     * 打开所有雷
+     */
+    public void openAllMine() {
+        for (int i = 0; i < myGameParamaters.getMineRow(); ++i) {
+            for (int j = 0; j < myGameParamaters.getMineCloumn(); ++j) {
+                if (mineBlocks[i][j].isMine) {
+                    openBlock(i, j);
+                }
+            }
+        }
     }
 
     /**
@@ -172,7 +239,30 @@ public class MineBlockData {
      */
     public void setHasFlag(int x, int y) {
         if (!mineBlocks[x][y].hasBeenOpened) {
-            mineBlocks[x][y].hasFlag = !mineBlocks[x][y].hasFlag;
+            changeBlockFlag(x, y);
+        }
+    }
+
+    /**
+     * 插旗/拔旗
+     * @param x 砖块横坐标
+     * @param y 砖块纵坐标
+     */
+    private void changeBlockFlag(int x, int y) {
+        int number;
+
+        mineBlocks[x][y].hasFlag = !mineBlocks[x][y].hasFlag;
+
+        if (mineBlocks[x][y].hasFlag) {
+            number = 1;
+        } else {
+            number = -1;
+        }
+
+        flagNumbers += number;
+        needOpenOrFlag -= number;
+        if (mineBlocks[x][y].isMine) {
+            mineWithFlag += number;
         }
     }
 
@@ -180,6 +270,10 @@ public class MineBlockData {
      * 初始化雷区数据
      */
     private void initMineBlockData() {
+        flagNumbers = 0;
+        mineWithFlag = 0;
+        needOpenOrFlag = myGameParamaters.getMineRow() * myGameParamaters.getMineCloumn();
+
         // 初始化雷区
         mineBlocks = new MineBlock[myGameParamaters.getMineRow()][myGameParamaters.getMineCloumn()];
         for (int i = 0; i < myGameParamaters.getMineRow(); ++i) {

@@ -2,6 +2,7 @@ package control;
 
 import model.MineBlockData;
 import tool.GameParamaters;
+import tool.GameTool;
 import view.BasicFrame;
 import view.MinePanel;
 
@@ -14,7 +15,6 @@ import java.awt.event.MouseEvent;
  */
 
 public class MineControl {
-    private static int DELAY = 5;
     private static int LEFT_RIGHT_MOUSE_EVENT = 1;
     private static int LEFT_MOUSE_EVENT = 2;
     private static int RIGHT_MOUSE_EVENT = 3;
@@ -32,21 +32,7 @@ public class MineControl {
         mineBlockData = new MineBlockData();
 
         minePanel.render(mineBlockData);
-        //new Thread(this::runThread).start();
     }
-
-//    private void runThread() {
-//        clickEvent(0, -1, -1);
-//    }
-//
-//    private void pause(int t) {
-//        try {
-//            Thread.sleep(t);
-//        }
-//        catch (InterruptedException e) {
-//            System.out.println("Error sleeping");
-//        }
-//    }
 
     private void clickEvent(int clickStatus, int x, int y) {
         // 左右键同时点击
@@ -59,6 +45,18 @@ public class MineControl {
         } else if (clickStatus == RIGHT_MOUSE_EVENT) {
             mineBlockData.setHasFlag(x, y);
         }
+
+        // 判断是否输
+        if (myGameParamaters.getLoseGame()) {
+            GameTool.loseGame();
+        }
+
+        // 判断是否赢
+        mineBlockData.hasWin();
+        if (myGameParamaters.getWinGame()) {
+            GameTool.winGame();
+        }
+
         minePanel.render(mineBlockData);
     }
 
@@ -84,4 +82,10 @@ public class MineControl {
         }
     }
 
+    public void showAllMine() {
+        if (myGameParamaters.getLoseGame()) {
+            mineBlockData.openAllMine();
+            minePanel.render(mineBlockData);
+        }
+    }
 }

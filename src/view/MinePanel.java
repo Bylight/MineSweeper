@@ -33,7 +33,6 @@ public class MinePanel extends JPanel {
      */
     public void render(MineBlockData mineBlockData) {
         this.mineBlockData = mineBlockData;
-        System.out.println("方法调用了 ！！！");
         repaint();
     }
 
@@ -52,7 +51,7 @@ public class MinePanel extends JPanel {
             for (int i = 0; i < myGameParamaters.getMineRow(); ++i) {
                 for (int j = 0; j < myGameParamaters.getMineCloumn(); ++j) {
 
-                    // 如果当前砖块未被打开且没有插旗(只显示砖块)
+                    // 如果当前砖块未被打开且没有插旗(只显示砖块)  ---
                     if (!mineBlockData.getHasBeeOpened(i, j) && !mineBlockData.getHasFlag(i, j)) {
                         GameResources.drawImage(g2d, j * myGameParamaters.getBlockWidth(), i * myGameParamaters.getBlockHeight()
                                 , GameResources.BLOCK_IMAGE_URL);
@@ -60,10 +59,11 @@ public class MinePanel extends JPanel {
                     } else if (!mineBlockData.getHasBeeOpened(i, j) && mineBlockData.getHasFlag(i, j)) {
                         GameResources.drawImage(g2d, j * myGameParamaters.getBlockWidth(), i * myGameParamaters.getBlockHeight()
                                 , GameResources.FLAG_IMAGE_URL);
-                    // 如果当前砖块被打开且是雷(显示雷，游戏结束)
+                    // 如果当前砖块被打开且是雷(显示雷，游戏结束)   ---
                     } else if (mineBlockData.getHasBeeOpened(i, j) && mineBlockData.getBlockIsMine(i, j)) {
                         GameResources.drawImage(g2d, j * myGameParamaters.getBlockWidth(), i * myGameParamaters.getBlockHeight()
                                 , GameResources.MINE_IMAGE_URL);
+                        openButMine();
                     // 如果当前砖块被打开却不是雷(显示周围雷的个数)
                     } else if (mineBlockData.getHasBeeOpened(i, j) && mineBlockData.getMineAroundNumber(i, j) >= 0) {
                         GameResources.drawImage(g2d, j * myGameParamaters.getBlockWidth(), i * myGameParamaters.getBlockHeight()
@@ -75,6 +75,19 @@ public class MinePanel extends JPanel {
 
         } catch (NullPointerException e) {
             System.out.println("初始化中，请稍等");
+        }
+    }
+
+    /**
+     * 打开砖块但砖块中有雷(结束游戏)
+     */
+    private void openButMine() {
+        int res = JOptionPane.showConfirmDialog(null, "你输了！！！", "是否重新开始", JOptionPane.YES_NO_OPTION);
+
+        if (res == JOptionPane.YES_OPTION) {
+            GameResources.startGame();
+        } else if (res == JOptionPane.NO_OPTION) {
+            System.exit(0);
         }
     }
 }

@@ -31,25 +31,27 @@ public class MineControl {
         minePanel.addMouseListener(new MineMouseListener());
         mineBlockData = new MineBlockData();
 
-        new Thread(this::runThread).start();
+        minePanel.render(mineBlockData);
+        //new Thread(this::runThread).start();
     }
 
-    private void runThread() {
-        clickEvent(0, -1, -1);
-    }
-
-    private void pause(int t) {
-        try {
-            Thread.sleep(t);
-        }
-        catch (InterruptedException e) {
-            System.out.println("Error sleeping");
-        }
-    }
+//    private void runThread() {
+//        clickEvent(0, -1, -1);
+//    }
+//
+//    private void pause(int t) {
+//        try {
+//            Thread.sleep(t);
+//        }
+//        catch (InterruptedException e) {
+//            System.out.println("Error sleeping");
+//        }
+//    }
 
     private void clickEvent(int clickStatus, int x, int y) {
         // 左右键同时点击
         if (clickStatus == LEFT_RIGHT_MOUSE_EVENT) {
+            mineBlockData.previewBlockAround(x, y);
         // 左键单击
         } else if (clickStatus == LEFT_MOUSE_EVENT) {
             mineBlockData.setOpened(x, y);
@@ -57,27 +59,10 @@ public class MineControl {
         } else if (clickStatus == RIGHT_MOUSE_EVENT) {
             mineBlockData.setHasFlag(x, y);
         }
-        pause(DELAY);
         minePanel.render(mineBlockData);
     }
 
     private class MineMouseListener extends MouseAdapter {
-        @Override
-        public void mouseClicked(MouseEvent event) {
-            Point position = event.getPoint();
-
-            int x = position.y / myGameParamaters.getBlockHeight();
-            int y = position.x / myGameParamaters.getBlockWidth();
-
-            // 左键单击
-            if (event.getButton() == MouseEvent.BUTTON1) {
-                clickEvent(LEFT_MOUSE_EVENT, x, y);
-            // 右键单击
-            } else if (event.getButton() == MouseEvent.BUTTON3) {
-                clickEvent(RIGHT_MOUSE_EVENT, x, y);
-            }
-        }
-
         @Override
         public void mousePressed(MouseEvent event) {
             Point position = event.getPoint();
@@ -86,8 +71,15 @@ public class MineControl {
             int y = position.x / myGameParamaters.getBlockWidth();
 
             // 左右键长按
-            if (event.getButton() == MouseEvent.BUTTON1 && event.getButton() == MouseEvent.BUTTON3) {
+            if (event.getModifiersEx() == (MouseEvent.BUTTON1_DOWN_MASK + MouseEvent.BUTTON3_DOWN_MASK)) {
                 clickEvent(LEFT_RIGHT_MOUSE_EVENT, x, y);
+            }
+            // 左键单击
+            else if (event.getModifiersEx() == MouseEvent.BUTTON1_DOWN_MASK) {
+                clickEvent(LEFT_MOUSE_EVENT, x, y);
+            // 右键单击
+            } else if (event.getModifiersEx() == MouseEvent.BUTTON3_DOWN_MASK) {
+                clickEvent(RIGHT_MOUSE_EVENT, x, y);
             }
         }
     }

@@ -1,5 +1,8 @@
 package tool;
 
+import control.MineControl;
+import view.BasicFrame;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -35,4 +38,16 @@ public class GameResources {
 
         g.drawImage(image, x, y, null);
     }
+
+    /**
+     * 开始游戏
+     */
+    public static void startGame() {
+        // 初始化总面板
+        EventQueue.invokeLater(() -> {
+            BasicFrame basicFrame = new BasicFrame();
+            MineControl mineControl = new MineControl(basicFrame);
+});
+    }
 }
+

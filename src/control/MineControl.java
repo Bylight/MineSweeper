@@ -46,6 +46,8 @@ public class MineControl {
             mineBlockData.setHasFlag(x, y);
         }
 
+        minePanel.render(mineBlockData);
+
         // 判断是否输
         if (myGameParamaters.getLoseGame()) {
             GameTool.loseGame();
@@ -57,7 +59,6 @@ public class MineControl {
             GameTool.winGame();
         }
 
-        minePanel.render(mineBlockData);
     }
 
     private class MineMouseListener extends MouseAdapter {
@@ -82,10 +83,21 @@ public class MineControl {
         }
     }
 
+    /**
+     * 展示面板中所有未插旗的雷
+     */
     public void showAllMine() {
         if (myGameParamaters.getLoseGame()) {
             mineBlockData.openAllMine();
             minePanel.render(mineBlockData);
         }
+    }
+
+    /**
+     * 重置面板
+     */
+    public void revertMineBlockData() {
+        mineBlockData = new MineBlockData();
+        minePanel.render(mineBlockData);
     }
 }

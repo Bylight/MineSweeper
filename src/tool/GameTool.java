@@ -63,7 +63,7 @@ public class GameTool {
         if (res == JOptionPane.YES_OPTION) {
             GameParamaters.getGameProperties().setLoseGame(false);
             GameParamaters.getGameProperties().setWinGame(false);
-            startGame();
+            mineControl.revertMineBlockData();
         } else if (res == JOptionPane.NO_OPTION) {
             System.exit(0);
         }
@@ -79,7 +79,7 @@ public class GameTool {
         if (res == JOptionPane.YES_OPTION) {
             GameParamaters.getGameProperties().setLoseGame(false);
             GameParamaters.getGameProperties().setWinGame(false);
-            startGame();
+            mineControl.revertMineBlockData();
         } else if (res == JOptionPane.NO_OPTION) {
             System.exit(0);
         }

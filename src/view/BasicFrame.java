@@ -1,6 +1,7 @@
 package view;
 
 import tool.GameParamaters;
+import view.StatusBar.StatusPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,7 @@ public class BasicFrame extends JFrame {
     private GameParamaters myGameParamaters;
     private MinePanel minePanel;
     private BasicPanel basicPanel;
+    private StatusPanel statusPanel;
 
     public BasicFrame() {
         super();
@@ -54,6 +56,17 @@ public class BasicFrame extends JFrame {
             setLayout(null);
             setPreferredSize(new Dimension(myGameParamaters.getFrameWidth(), myGameParamaters.getFrameHeight()));
             initMinePanel();
+            initStatusPanel();
+        }
+
+        /**
+         * 初始化状态栏面板
+         */
+        private void initStatusPanel() {
+            statusPanel = new StatusPanel();
+            add(statusPanel);
+            statusPanel.setBounds(0, myGameParamaters.getStatusBarY(),
+                    myGameParamaters.getFrameWidth(), myGameParamaters.getStatusBarHeight());
         }
 
         /**
@@ -62,7 +75,8 @@ public class BasicFrame extends JFrame {
         private void initMinePanel() {
             minePanel = new MinePanel();
             add(minePanel);
-            minePanel.setBounds(0, myGameParamaters.getblocky(), myGameParamaters.getFrameWidth(), myGameParamaters.getMineHeight());
+            minePanel.setBounds(0, myGameParamaters.getBlockY(),
+                    myGameParamaters.getFrameWidth(), myGameParamaters.getMineHeight());
         }
     }
 }

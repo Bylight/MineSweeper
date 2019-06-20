@@ -153,11 +153,11 @@ public class GameParamaters {
         setParamaters();
     }
 
-    public int getstatusbary() {
+    public int getStatusBarY() {
         return MENU_BAR_HEIGHT;
     }
 
-    public int getblocky() {
+    public int getBlockY() {
         return MENU_BAR_HEIGHT + STATUS_BAR_HEIGHT;
     }
 
@@ -191,5 +191,9 @@ public class GameParamaters {
 
     public void setWinGame(boolean winGame) {
         this.winGame = winGame;
+    }
+
+    public int getTimeLabelWidth() {
+        return getFrameWidth() / 5;
     }
 }

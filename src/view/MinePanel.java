@@ -13,8 +13,6 @@ import java.awt.*;
 public class MinePanel extends JPanel {
     private GameParamaters myGameParamaters;
 
-    private int height;
-    private int width;
     private MineBlockData mineBlockData;
 
     MinePanel() {

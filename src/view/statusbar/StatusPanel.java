@@ -1,4 +1,4 @@
-package view.StatusBar;
+package view.statusbar;
 
 import tool.GameParamaters;
 
@@ -9,15 +9,15 @@ import java.awt.*;
  * 状态栏面板
  */
 public class StatusPanel extends JPanel {
-    // 计数间隔设为1000ms，即1s
+    /** 计数间隔设为1000ms，即1s */
     private static int TIME_INTERVAL = 1000;
 
     private GameParamaters myGamePatamaters;
 
-    // 计时器标签
+    /** 计时器标签 */
     private TimeLabel timeLabel;
 
-    // 计时器
+    /** 计时器 */
     private Timer timer;
 
     public StatusPanel() {
@@ -38,7 +38,6 @@ public class StatusPanel extends JPanel {
     private void initTimeLabel() {
         timeLabel = new TimeLabel();
         add(timeLabel, BorderLayout.WEST);
-//        timeLabel.setBounds(0 ,0, myGamePatamaters.getTimeLabelWidth(), myGamePatamaters.getStatusBarHeight());
         initTimer();
         timer.start();
     }

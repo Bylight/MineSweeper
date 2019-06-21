@@ -1,7 +1,7 @@
 package view;
 
 import tool.GameParamaters;
-import view.StatusBar.StatusPanel;
+import view.statusbar.StatusPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,6 +47,7 @@ public class BasicFrame extends JFrame {
             // 开启双缓存
             super(true);
             initBasicPanel();
+            initStatusPanel();
         }
 
         /**

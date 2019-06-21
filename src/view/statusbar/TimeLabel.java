@@ -1,4 +1,4 @@
-package view.StatusBar;
+package view.statusbar;
 
 import tool.GameParamaters;
 
@@ -24,7 +24,7 @@ public class TimeLabel extends JLabel {
 
     private void initTimeLable() {
 
-        setFont(new java.awt.Font("Dialog", Font.BOLD, 18));
+        setFont(new java.awt.Font("Dialog", Font.BOLD, myGamePatamaters.getLabelFontSize()));
         setForeground(Color.RED);
         setHorizontalAlignment(SwingConstants.CENTER);
 

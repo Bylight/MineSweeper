@@ -30,6 +30,8 @@ package tool;
 public class GameParamaters {
     private static final GameParamaters GAME_PROPERTIES = new GameParamaters();
 
+    private static final int LABEL_FONT_SIZE = 16;
+
     private static final int BLOCK_WIDTH = 32;
     private static final int BLOCK_HEIGHT = 32;
 
@@ -195,5 +197,9 @@ public class GameParamaters {
 
     public int getTimeLabelWidth() {
         return getFrameWidth() / 5;
+    }
+
+    public int getLabelFontSize() {
+        return LABEL_FONT_SIZE;
     }
 }

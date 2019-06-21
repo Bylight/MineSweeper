@@ -17,7 +17,7 @@ public class MinePanel extends JPanel {
 
     MinePanel() {
         super(true);
-        gameParamaters = GameParamaters.getGameProperties();
+        gameParamaters = GameParamaters.getGameParamaters();
         initMinePanel();
     }
 

@@ -31,6 +31,9 @@ public class GameControl {
 
             statusPanel = basicFrame.getStatusPanel();
             statusPanel.startTimer();
+
+            // 通过设置回调接口修改剩余雷数
+            mineControl.setRunnable(this::removeMineNumber, this::addMineNumber);
         });
     }
 
@@ -72,10 +75,27 @@ public class GameControl {
      * 重新开始游戏
      */
     private void restartGame() {
-        GameParamaters.getGameProperties().setLoseGame(false);
-        GameParamaters.getGameProperties().setWinGame(false);
+        GameParamaters.getGameParamaters().setLoseGame(false);
+        GameParamaters.getGameParamaters().setWinGame(false);
+        // 重置雷区数据
         mineControl.revertMineBlockData();
-        statusPanel.restartTimer();
+        // 重置计时器
+        statusPanel.resetTimer();
+        // 重置剩余雷数
+        statusPanel.resetMineLeft();
     }
 
+    /**
+     * 剩余雷数减一(用于接口回调)
+     */
+    private void removeMineNumber() {
+        statusPanel.removeMineLeft();
+    }
+
+    /**
+     * 剩余雷数加一(用于接口回调)
+     */
+    private void addMineNumber() {
+        statusPanel.addMineLeft();
+    }
 }

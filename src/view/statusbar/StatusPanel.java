@@ -12,16 +12,19 @@ public class StatusPanel extends JPanel {
     /** 计数间隔设为1000ms，即1s */
     private static int TIME_INTERVAL = 1000;
 
-    private GameParamaters myGamePatamaters;
+    private GameParamaters gameParamaters;
 
     /** 计时器标签 */
     private TimeLabel timeLabel;
+
+    /** 剩余雷数标签 */
+    private MineLeftLabel mineLeftLabel;
 
     /** 计时器 */
     private Timer timer;
 
     public StatusPanel() {
-        myGamePatamaters = GameParamaters.getGameProperties();
+        gameParamaters = GameParamaters.getGameParamaters();
         initSattusPanel();
     }
 
@@ -30,6 +33,37 @@ public class StatusPanel extends JPanel {
         setOpaque(true);
         setLayout(new BorderLayout());
         initTimeLabel();
+        initMineLeftLabel();
+    }
+
+    /**
+     * 初始化剩余雷数标签
+     */
+    private void initMineLeftLabel() {
+        mineLeftLabel = new MineLeftLabel();
+        add(mineLeftLabel, BorderLayout.EAST);
+        mineLeftLabel.setSize(timeLabel.getWidth(), timeLabel.getHeight());
+    }
+
+    /**
+     * 重置剩余雷数
+     */
+    public void resetMineLeft() {
+        mineLeftLabel.resetMineLeft();
+    }
+
+    /**
+     * 剩余雷数减一
+     */
+    public void removeMineLeft() {
+        mineLeftLabel.removeMineLeft();
+    }
+
+    /**
+     * 剩余雷数加一
+     */
+    public void addMineLeft() {
+        mineLeftLabel.addMineLeft();
     }
 
     /**
@@ -65,7 +99,7 @@ public class StatusPanel extends JPanel {
     /**
      * 重新开始计时(在游戏重新开始时调用)
      */
-    public void restartTimer() {
+    public void resetTimer() {
         timeLabel.resetTime();
         timer.restart();
     }
@@ -76,5 +110,14 @@ public class StatusPanel extends JPanel {
      */
     public String getTime() {
         return timeLabel.toString();
+    }
+
+    /**
+     * 用于在游戏结算时获取排雷数
+     * @return 目前已经排除的雷数
+     */
+    public String getCleanedMineNumber() {
+        int cleanedMineNumber = gameParamaters.getMineNumber() - Integer.parseInt(mineLeftLabel.toString());
+        return String.valueOf(cleanedMineNumber);
     }
 }

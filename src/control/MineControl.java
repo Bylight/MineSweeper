@@ -26,7 +26,7 @@ public class MineControl {
     private MineBlockData mineBlockData;
 
     MineControl(BasicFrame basicFrame) {
-        gameParamaters = GameParamaters.getGameProperties();
+        gameParamaters = GameParamaters.getGameParamaters();
         gameControl = GameControl.getGameControl();
 
         minePanel = basicFrame.getMinePanel();
@@ -101,5 +101,14 @@ public class MineControl {
     void revertMineBlockData() {
         mineBlockData = new MineBlockData();
         minePanel.render(mineBlockData);
+    }
+
+    /**
+     * 设置用于修改剩余雷数的回调接口
+     * @param removeMineNumber 用于减少剩余雷数
+     * @param addMineNumber 用于增加剩余雷数
+     */
+    void setRunnable(Runnable removeMineNumber, Runnable addMineNumber) {
+        mineBlockData.setRunnable(removeMineNumber, addMineNumber);
     }
 }

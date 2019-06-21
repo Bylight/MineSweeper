@@ -11,6 +11,9 @@ public class MineBlockData {
     private GameParamaters gameParamaters;
     private MineBlock[][] mineBlocks;
 
+    private Runnable removeMineNumber;
+    private Runnable addMineNumber;
+
     /**被旗子标记的雷的数目*/
     private int mineWithFlag;
     /**当前已标记的旗子总数*/
@@ -19,8 +22,18 @@ public class MineBlockData {
     private int needOpenOrFlag;
 
     public MineBlockData() {
-        gameParamaters = GameParamaters.getGameProperties();
+        gameParamaters = GameParamaters.getGameParamaters();
         initMineBlockData();
+    }
+
+    /**
+     * 设置用于修改剩余雷数的回调接口
+     * @param removeMineNumber 用于减少剩余雷数
+     * @param addMineNumber 用于增加剩余雷数
+     */
+    public void setRunnable(Runnable removeMineNumber, Runnable addMineNumber) {
+        this.removeMineNumber = removeMineNumber;
+        this.addMineNumber = addMineNumber;
     }
 
     /**
@@ -266,9 +279,30 @@ public class MineBlockData {
 
         flagNumbers += number;
         needOpenOrFlag -= number;
+
+        // 如果旗插在雷上，判断是否已经可以根据已知信息推出
         if (mineBlocks[x][y].isMine) {
             mineWithFlag += number;
+            if (number == 1) {
+                addFlagMine();
+            } else {
+                removeFlagMine();
+            }
         }
+    }
+
+    /**
+     * 使用removeMineNumer接口，实现在GameCtrol中让剩余雷数自减
+     */
+    private void addFlagMine() {
+        removeMineNumber.run();
+    }
+
+    /**
+     * 使用addMineNumber接口，实现在拔旗时在GameControl中让剩余雷数自增
+     */
+    private void removeFlagMine() {
+        addMineNumber.run();
     }
 
     /**

@@ -6,10 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TimeLabel extends JLabel {
-    private GameParamaters myGamePatamaters;
-
-    // 每分钟共60s
-    private static int MAX_SECOND = 60;
+    private GameParamaters gameParamaters;
 
     // 游戏用时
     private int hour;
@@ -17,14 +14,14 @@ public class TimeLabel extends JLabel {
     private int second;
 
     TimeLabel() {
-        myGamePatamaters = GameParamaters.getGameProperties();
-        resetTime();
+        gameParamaters = GameParamaters.getGameParamaters();
         initTimeLable();
+        resetTime();
     }
 
     private void initTimeLable() {
 
-        setFont(new java.awt.Font("Dialog", Font.BOLD, myGamePatamaters.getLabelFontSize()));
+        setFont(new java.awt.Font("Dialog", Font.BOLD, gameParamaters.getLabelFontSize()));
         setForeground(Color.RED);
         setHorizontalAlignment(SwingConstants.CENTER);
 

@@ -28,7 +28,7 @@ package tool;
  */
 @SuppressWarnings("ALL")
 public class GameParamaters {
-    private static final GameParamaters GAME_PROPERTIES = new GameParamaters();
+    private static final GameParamaters GAME_PARAMATERS = new GameParamaters();
 
     private static final int LABEL_FONT_SIZE = 16;
 
@@ -62,8 +62,8 @@ public class GameParamaters {
         setParamaters();
     }
 
-    public static GameParamaters getGameProperties() {
-        return GAME_PROPERTIES;
+    public static GameParamaters getGameParamaters() {
+        return GAME_PARAMATERS;
     }
 
     /**

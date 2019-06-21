@@ -17,7 +17,7 @@ public class BasicFrame extends JFrame {
 
     public BasicFrame() {
         super();
-        gameParamaters = GameParamaters.getGameProperties();
+        gameParamaters = GameParamaters.getGameParamaters();
         basicPanel = new BasicPanel();
         initFrame();
     }

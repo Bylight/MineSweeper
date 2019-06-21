@@ -10,14 +10,14 @@ import java.awt.*;
  * 绘制游戏基础窗口
  */
 public class BasicFrame extends JFrame {
-    private GameParamaters myGameParamaters;
+    private GameParamaters gameParamaters;
     private MinePanel minePanel;
     private BasicPanel basicPanel;
     private StatusPanel statusPanel;
 
     public BasicFrame() {
         super();
-        myGameParamaters = GameParamaters.getGameProperties();
+        gameParamaters = GameParamaters.getGameProperties();
         basicPanel = new BasicPanel();
         initFrame();
     }
@@ -39,6 +39,10 @@ public class BasicFrame extends JFrame {
         return minePanel;
     }
 
+    public StatusPanel getStatusPanel() {
+        return statusPanel;
+    }
+
     /**
      * 内部类： 基础面板
      */
@@ -55,7 +59,7 @@ public class BasicFrame extends JFrame {
          */
         private void initBasicPanel() {
             setLayout(null);
-            setPreferredSize(new Dimension(myGameParamaters.getFrameWidth(), myGameParamaters.getFrameHeight()));
+            setPreferredSize(new Dimension(gameParamaters.getFrameWidth(), gameParamaters.getFrameHeight()));
             initMinePanel();
             initStatusPanel();
         }
@@ -66,8 +70,8 @@ public class BasicFrame extends JFrame {
         private void initStatusPanel() {
             statusPanel = new StatusPanel();
             add(statusPanel);
-            statusPanel.setBounds(0, myGameParamaters.getStatusBarY(),
-                    myGameParamaters.getFrameWidth(), myGameParamaters.getStatusBarHeight());
+            statusPanel.setBounds(0, gameParamaters.getStatusBarY(),
+                    gameParamaters.getFrameWidth(), gameParamaters.getStatusBarHeight());
         }
 
         /**
@@ -76,8 +80,8 @@ public class BasicFrame extends JFrame {
         private void initMinePanel() {
             minePanel = new MinePanel();
             add(minePanel);
-            minePanel.setBounds(0, myGameParamaters.getBlockY(),
-                    myGameParamaters.getFrameWidth(), myGameParamaters.getMineHeight());
+            minePanel.setBounds(0, gameParamaters.getBlockY(),
+                    gameParamaters.getFrameWidth(), gameParamaters.getMineHeight());
         }
     }
 }

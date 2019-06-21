@@ -38,8 +38,6 @@ public class StatusPanel extends JPanel {
     private void initTimeLabel() {
         timeLabel = new TimeLabel();
         add(timeLabel, BorderLayout.WEST);
-        initTimer();
-        timer.start();
     }
 
     /**
@@ -47,6 +45,14 @@ public class StatusPanel extends JPanel {
      */
     private void initTimer() {
         timer = new Timer(TIME_INTERVAL, e -> timeLabel.countTime());
+    }
+
+    /**
+     * 开始计时
+     */
+    public void startTimer() {
+        initTimer();
+        timer.start();
     }
 
     /**
@@ -59,8 +65,16 @@ public class StatusPanel extends JPanel {
     /**
      * 重新开始计时(在游戏重新开始时调用)
      */
-    public void resetTimer() {
+    public void restartTimer() {
         timeLabel.resetTime();
         timer.restart();
+    }
+
+    /**
+     * 用于在游戏结束时获取用时
+     * @return 当前计时器时间
+     */
+    public String getTime() {
+        return timeLabel.toString();
     }
 }

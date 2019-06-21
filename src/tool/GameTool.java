@@ -40,49 +40,5 @@ public class GameTool {
 
         g.drawImage(image, x, y, null);
     }
-
-    /**
-     * 开始游戏
-     */
-    public static void startGame() {
-        // 初始化总面板
-        EventQueue.invokeLater(() -> {
-            BasicFrame basicFrame = new BasicFrame();
-            mineControl = new MineControl(basicFrame);
-        });
-    }
-
-    /**
-     * 打开砖块但砖块中有雷(输游戏)
-     */
-    public static void loseGame() {
-        mineControl.showAllMine();
-
-        int res = JOptionPane.showConfirmDialog(null, "重新开始?", "你输了！！！", JOptionPane.YES_NO_OPTION);
-
-        if (res == JOptionPane.YES_OPTION) {
-            GameParamaters.getGameProperties().setLoseGame(false);
-            GameParamaters.getGameProperties().setWinGame(false);
-            mineControl.revertMineBlockData();
-        } else if (res == JOptionPane.NO_OPTION) {
-            System.exit(0);
-        }
-    }
-
-    /**
-     * 打开所有砖块,找出所有雷(赢游戏)
-     */
-    public static void winGame() {
-
-        int res = JOptionPane.showConfirmDialog(null, "再玩一次?", "你赢了！！！", JOptionPane.YES_NO_OPTION);
-
-        if (res == JOptionPane.YES_OPTION) {
-            GameParamaters.getGameProperties().setLoseGame(false);
-            GameParamaters.getGameProperties().setWinGame(false);
-            mineControl.revertMineBlockData();
-        } else if (res == JOptionPane.NO_OPTION) {
-            System.exit(0);
-        }
-    }
 }
 

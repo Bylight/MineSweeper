@@ -11,18 +11,18 @@ import java.awt.*;
  * 雷区面板
  */
 public class MinePanel extends JPanel {
-    private GameParamaters myGameParamaters;
+    private GameParamaters gameParamaters;
 
     private MineBlockData mineBlockData;
 
     MinePanel() {
         super(true);
-        myGameParamaters = GameParamaters.getGameProperties();
+        gameParamaters = GameParamaters.getGameProperties();
         initMinePanel();
     }
 
     private void initMinePanel() {
-        setSize(myGameParamaters.getMineHeight(), myGameParamaters.getFrameWidth());
+        setSize(gameParamaters.getMineHeight(), gameParamaters.getFrameWidth());
     }
 
     /**
@@ -46,24 +46,24 @@ public class MinePanel extends JPanel {
 
         try {
 
-            for (int i = 0; i < myGameParamaters.getMineRow(); ++i) {
-                for (int j = 0; j < myGameParamaters.getMineCloumn(); ++j) {
+            for (int i = 0; i < gameParamaters.getMineRow(); ++i) {
+                for (int j = 0; j < gameParamaters.getMineCloumn(); ++j) {
 
                     // 如果当前砖块未被打开且没有插旗(只显示砖块)
                     if (!mineBlockData.getHasBeeOpened(i, j) && !mineBlockData.getHasFlag(i, j)) {
-                        GameTool.drawImage(g2d, j * myGameParamaters.getBlockWidth(), i * myGameParamaters.getBlockHeight()
+                        GameTool.drawImage(g2d, j * gameParamaters.getBlockWidth(), i * gameParamaters.getBlockHeight()
                                 , GameTool.BLOCK_IMAGE_URL);
                     // 如果当前砖块未被打开但有插旗(显示旗子)
                     } else if (!mineBlockData.getHasBeeOpened(i, j) && mineBlockData.getHasFlag(i, j)) {
-                        GameTool.drawImage(g2d, j * myGameParamaters.getBlockWidth(), i * myGameParamaters.getBlockHeight()
+                        GameTool.drawImage(g2d, j * gameParamaters.getBlockWidth(), i * gameParamaters.getBlockHeight()
                                 , GameTool.FLAG_IMAGE_URL);
                     // 如果当前砖块被打开且是雷(显示雷，游戏结束)
                     } else if (mineBlockData.getHasBeeOpened(i, j) && mineBlockData.getBlockIsMine(i, j)) {
-                        GameTool.drawImage(g2d, j * myGameParamaters.getBlockWidth(), i * myGameParamaters.getBlockHeight()
+                        GameTool.drawImage(g2d, j * gameParamaters.getBlockWidth(), i * gameParamaters.getBlockHeight()
                                 , GameTool.MINE_IMAGE_URL);
                     // 如果当前砖块被打开却不是雷(显示周围雷的个数)
                     } else if (mineBlockData.getHasBeeOpened(i, j) && mineBlockData.getMineAroundNumber(i, j) >= 0) {
-                        GameTool.drawImage(g2d, j * myGameParamaters.getBlockWidth(), i * myGameParamaters.getBlockHeight()
+                        GameTool.drawImage(g2d, j * gameParamaters.getBlockWidth(), i * gameParamaters.getBlockHeight()
                                 , GameTool.getNumberImageURL(mineBlockData.getMineAroundNumber(i, j)));
                     }
 

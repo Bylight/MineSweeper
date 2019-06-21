@@ -19,13 +19,15 @@ public class MineControl {
     private static int LEFT_MOUSE_EVENT = 2;
     private static int RIGHT_MOUSE_EVENT = 3;
 
-    private GameParamaters myGameParamaters;
+    private GameParamaters gameParamaters;
+    private GameControl gameControl;
 
     private MinePanel minePanel;
     private MineBlockData mineBlockData;
 
-    public MineControl(BasicFrame basicFrame) {
-        myGameParamaters = GameParamaters.getGameProperties();
+    MineControl(BasicFrame basicFrame) {
+        gameParamaters = GameParamaters.getGameProperties();
+        gameControl = GameControl.getGameControl();
 
         minePanel = basicFrame.getMinePanel();
         minePanel.addMouseListener(new MineMouseListener());
@@ -49,14 +51,14 @@ public class MineControl {
         minePanel.render(mineBlockData);
 
         // 判断是否输
-        if (myGameParamaters.getLoseGame()) {
-            GameTool.loseGame();
+        if (gameParamaters.getLoseGame()) {
+            gameControl.loseGame();
         }
 
         // 判断是否赢
         mineBlockData.hasWin();
-        if (myGameParamaters.getWinGame()) {
-            GameTool.winGame();
+        if (gameParamaters.getWinGame()) {
+            gameControl.winGame();
         }
 
     }
@@ -66,8 +68,8 @@ public class MineControl {
         public void mousePressed(MouseEvent event) {
             Point position = event.getPoint();
 
-            int x = position.y / myGameParamaters.getBlockHeight();
-            int y = position.x / myGameParamaters.getBlockWidth();
+            int x = position.y / gameParamaters.getBlockHeight();
+            int y = position.x / gameParamaters.getBlockWidth();
 
             // 左右键长按
             if (event.getModifiersEx() == (MouseEvent.BUTTON1_DOWN_MASK + MouseEvent.BUTTON3_DOWN_MASK)) {
@@ -86,8 +88,8 @@ public class MineControl {
     /**
      * 展示面板中所有未插旗的雷
      */
-    public void showAllMine() {
-        if (myGameParamaters.getLoseGame()) {
+    void showAllMine() {
+        if (gameParamaters.getLoseGame()) {
             mineBlockData.openAllMine();
             minePanel.render(mineBlockData);
         }
@@ -96,7 +98,7 @@ public class MineControl {
     /**
      * 重置面板
      */
-    public void revertMineBlockData() {
+    void revertMineBlockData() {
         mineBlockData = new MineBlockData();
         minePanel.render(mineBlockData);
     }

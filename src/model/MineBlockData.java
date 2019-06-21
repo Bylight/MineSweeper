@@ -8,7 +8,7 @@ import tool.GameTool;
  */
 
 public class MineBlockData {
-    private GameParamaters myGameParamaters;
+    private GameParamaters gameParamaters;
     private MineBlock[][] mineBlocks;
 
     /**被旗子标记的雷的数目*/
@@ -19,7 +19,7 @@ public class MineBlockData {
     private int needOpenOrFlag;
 
     public MineBlockData() {
-        myGameParamaters = GameParamaters.getGameProperties();
+        gameParamaters = GameParamaters.getGameProperties();
         initMineBlockData();
     }
 
@@ -27,8 +27,8 @@ public class MineBlockData {
      * 判断是否已经赢得游戏(找出所有的雷且打开所有砖块)
      */
     public void hasWin() {
-        myGameParamaters.setWinGame((mineWithFlag == flagNumbers)
-                && (mineWithFlag == myGameParamaters.getMineNumber()) && (needOpenOrFlag == 0));
+        gameParamaters.setWinGame((mineWithFlag == flagNumbers)
+                && (mineWithFlag == gameParamaters.getMineNumber()) && (needOpenOrFlag == 0));
     }
 
     /**
@@ -47,7 +47,7 @@ public class MineBlockData {
      * @return 当前横坐标是否合法(true/false)
      */
     private boolean isRowLeaglegal(int x) {
-        return x >= 0 && x < myGameParamaters.getMineRow();
+        return x >= 0 && x < gameParamaters.getMineRow();
     }
 
     /**
@@ -56,7 +56,7 @@ public class MineBlockData {
      * @return 当前纵坐标是否合法(true/false)
      */
     private boolean isCloumnLegal(int y) {
-        return y >= 0 && y < myGameParamaters.getMineCloumn();
+        return y >= 0 && y < gameParamaters.getMineCloumn();
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -173,9 +173,14 @@ public class MineBlockData {
      * @param y 砖块纵坐标
      */
     public void setOpened(int x, int y) {
-        // 如果点击到雷
+        // 如果点到旗，应无反应
+        if (mineBlocks[x][y].hasFlag) {
+            return;
+        }
+
+        // 如果点击到雷，结束游戏
         if (mineBlocks[x][y].isMine) {
-            myGameParamaters.setLoseGame(true);
+            gameParamaters.setLoseGame(true);
             return;
         }
 
@@ -223,8 +228,8 @@ public class MineBlockData {
      * 打开所有雷
      */
     public void openAllMine() {
-        for (int i = 0; i < myGameParamaters.getMineRow(); ++i) {
-            for (int j = 0; j < myGameParamaters.getMineCloumn(); ++j) {
+        for (int i = 0; i < gameParamaters.getMineRow(); ++i) {
+            for (int j = 0; j < gameParamaters.getMineCloumn(); ++j) {
                 if (mineBlocks[i][j].isMine) {
                     openBlock(i, j);
                 }
@@ -272,12 +277,12 @@ public class MineBlockData {
     private void initMineBlockData() {
         flagNumbers = 0;
         mineWithFlag = 0;
-        needOpenOrFlag = myGameParamaters.getMineRow() * myGameParamaters.getMineCloumn();
+        needOpenOrFlag = gameParamaters.getMineRow() * gameParamaters.getMineCloumn();
 
         // 初始化雷区
-        mineBlocks = new MineBlock[myGameParamaters.getMineRow()][myGameParamaters.getMineCloumn()];
-        for (int i = 0; i < myGameParamaters.getMineRow(); ++i) {
-            for (int j = 0; j < myGameParamaters.getMineCloumn(); ++j) {
+        mineBlocks = new MineBlock[gameParamaters.getMineRow()][gameParamaters.getMineCloumn()];
+        for (int i = 0; i < gameParamaters.getMineRow(); ++i) {
+            for (int j = 0; j < gameParamaters.getMineCloumn(); ++j) {
                 mineBlocks[i][j] = new MineBlock();
             }
         }
@@ -295,21 +300,21 @@ public class MineBlockData {
     private void shuffleMine() {
         int blockNumber;
 
-        blockNumber = myGameParamaters.getMineRow() * myGameParamaters.getMineCloumn();
+        blockNumber = gameParamaters.getMineRow() * gameParamaters.getMineCloumn();
 
         // 放置n个雷(由游戏难度决定个数)
-        for (int i = 0; i < myGameParamaters.getMineNumber(); ++i) {
-            mineBlocks[i / myGameParamaters.getMineCloumn()][i % myGameParamaters.getMineCloumn()].isMine = true;
+        for (int i = 0; i < gameParamaters.getMineNumber(); ++i) {
+            mineBlocks[i / gameParamaters.getMineCloumn()][i % gameParamaters.getMineCloumn()].isMine = true;
         }
 
         // 将n个雷随机放置(每次随机将一个砖块放在第i个位置)
         for (int i = 0; i < blockNumber; ++i) {
             int randomNumber = (int) (Math.random() * (blockNumber - i)) + i;
 
-            int x = randomNumber / myGameParamaters.getMineCloumn();
-            int y = randomNumber % myGameParamaters.getMineCloumn();
+            int x = randomNumber / gameParamaters.getMineCloumn();
+            int y = randomNumber % gameParamaters.getMineCloumn();
 
-            swapMineBlock(i / myGameParamaters.getMineCloumn(), i % myGameParamaters.getMineCloumn(), x, y);
+            swapMineBlock(i / gameParamaters.getMineCloumn(), i % gameParamaters.getMineCloumn(), x, y);
         }
     }
 
@@ -338,8 +343,8 @@ public class MineBlockData {
      * 更新所有砖块周围的雷数(mineAroundNumber)
      */
     private void updateAllMineNumber() {
-        for (int i = 0; i < myGameParamaters.getMineRow(); ++i) {
-            for (int j = 0; j < myGameParamaters.getMineCloumn(); ++j) {
+        for (int i = 0; i < gameParamaters.getMineRow(); ++i) {
+            for (int j = 0; j < gameParamaters.getMineCloumn(); ++j) {
                 if (!mineBlocks[i][j].isMine) {
                     updateOneMineNumber(i, j);
                 }
